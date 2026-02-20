@@ -30,9 +30,10 @@ public class MainWindow extends BasicWindow {
         );
 
         MenuItem[] menu = {
-                new MenuItem("Search Questions by Tag", this::NoOp),
-                new MenuItem("Add New Question", this::NoOp),
-                new MenuItem("View All Questions", ui::showAllQuestionsPage),
+                new MenuItem("Edit Teams", this::NoOp),
+                new MenuItem("Edit Players", this::NoOp),
+                new MenuItem("Edit Games", this::NoOp),
+                new MenuItem("View All Player Stats", ui::showAllPlayersPage),
                 new MenuItem("Exit", ui::closeApp)
         };
 

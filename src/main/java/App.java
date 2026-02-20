@@ -1,6 +1,6 @@
 import backend.Database;
-import backend.repositories.QuestionRepo;
-import backend.services.QuestionService;
+import backend.repositories.StatsRepo;
+import backend.services.StatsService;
 import ui.Gui;
 import ui.UIController;
 
@@ -17,7 +17,7 @@ Backend
  */
 public class App {
     public static void run() throws SQLException {
-        String url = "jdbc:sqlite:db";
+        String url = "jdbc:sqlite:Stats_Tracker";
         try (
                 Database db = new Database(url);
         ) {
@@ -26,15 +26,15 @@ public class App {
             Connection conn = db.getConnection();
 
             // Repositories
-            QuestionRepo questionRepo = new QuestionRepo(conn);
+            StatsRepo statsRepo = new StatsRepo(conn);
 
             // Services
-            QuestionService questionService = new QuestionService(questionRepo);
+            StatsService statsService = new StatsService(statsRepo);
 
             // GUI
             Gui gui = new Gui();
             gui.start();
-            UIController ui = new UIController(gui, questionService);
+            UIController ui = new UIController(gui, statsService);
             ui.showMainMenu();
 
         } catch (IOException e) {
