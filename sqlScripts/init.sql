@@ -1,24 +1,49 @@
-CREATE TABLE question (
+CREATE TABLE player (
 	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	question_text TEXT NOT NULL
+	team_id INTEGER NOT NULL,
+	first_name TEXT NOT NULL,
+	last_name TEXT NOT NULL,
+	height_inches NUMERIC NOT NULL,
+	weight_pounds NUMERIC NOT NULL,
+	jersey_number INTEGER NOT NULL,
+	position TEXT NOT NULL,
+	CONSTRAINT player_team_FK FOREIGN KEY (team_id) REFERENCES team(id)
 );
 
-CREATE TABLE answer_option (
+CREATE TABLE coach (
 	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	option_text TEXT NOT NULL,
-	is_answer INTEGER NOT NULL CHECK (is_answer IN (0, 1)) DEFAULT 0,
-	question_id INTEGER NOT NULL
+	first_name TEXT NOT NULL,
+	last_name TEXT NOT NULL
 );
 
-CREATE TABLE question_tag (
+CREATE TABLE team (
 	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	name TEXT NOT NULL UNIQUE
+	team_name TEXT NOT NULL,
+	season TEXT NOT NULL,
+	coach_id INTEGER NOT NULL,
+	CONSTRAINT team_coach_FK FOREIGN KEY (coach_id) REFERENCES coach(id)
 );
 
-CREATE TABLE question_question_tag (
-	question_id INTEGER NOT NULL,
-	question_tag_id INTEGER NOT NULL,
-	PRIMARY KEY (question_id, question_tag_id),
-	CONSTRAINT question_question_tag_question_FK FOREIGN KEY (question_id) REFERENCES question(id),
-	CONSTRAINT question_question_tag_question_tag_FK FOREIGN KEY (question_tag_id) REFERENCES question_tag(id)
+CREATE TABLE game (
+	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    home_team_id INTEGER NOT NULL,
+    away_team_id INTEGER NOT NULL,
+    home_score INTEGER NOT NULL,
+    away_score INTEGER NOT NULL,
+    date TEXT NOT NULL,
+    CONSTRAINT game_team_FK FOREIGN KEY (team_id) REFERENCES team(id),
+    CONSTRAINT game_team_FK_1 FOREIGN KEY (team_id) REFERENCES team(id)
+);
+
+CREATE TABLE player_stats (
+	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    player_id INTEGER NOT NULL,
+    game_id INTEGER NOT NULL,
+    points INTEGER NOT NULL,
+    assists INTEGER NOT NULL,
+    rebounds INTEGER NOT NULL,
+    steals INTEGER NOT NULL,
+    blocks INTEGER NOT NULL,
+    CONSTRAINT player_stats_player_FK FOREIGN KEY (player_id) REFERENCES player(id),
+    CONSTRAINT player_stats_game_FK FOREIGN KEY (game_id) REFERENCES game(id)
 );
