@@ -19,4 +19,13 @@ public class StatsService {
     public List<PlayerStats> getAllPlayerStats() {
         return repo.getPlayerStats();
     }
+
+    public void addPlayer(String firstName, String lastName, int height, int weight, int jersey, String position, int teamId) {
+
+        if (firstName == null || lastName == null) {
+            throw new IllegalArgumentException("Name cannot be null");
+        }
+
+        repo.insertPlayer(firstName, lastName, height, weight, jersey, position, teamId);
+    }
 }

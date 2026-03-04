@@ -2,6 +2,7 @@ package ui;
 
 import backend.services.StatsService;
 import com.googlecode.lanterna.gui2.Window;
+import ui.windows.AddPlayerWindow;
 import ui.windows.AllPlayersWindow;
 import ui.windows.PlayerStatsWindow;
 import ui.windows.MainWindow;
@@ -24,6 +25,8 @@ public class UIController {
     }
 
     public void showAllPlayersPage() { gui.show(new AllPlayersWindow(this, statsService)); }
+
+    public void addPlayersPage() { gui.show(new AddPlayerWindow(this, statsService)); }
 
     public void showPlayerStatsPage() { gui.show(new PlayerStatsWindow(this, statsService)); }
 

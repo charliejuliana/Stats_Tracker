@@ -46,4 +46,26 @@ public class StatsRepo {
         }
         return playerStats;
     }
+
+    public void insertPlayer(String firstName, String lastName, int height, int weight, int jerseyNumber, String position, int teamId) {
+
+        try (PreparedStatement sql = conn.prepareStatement(
+                "INSERT INTO Player " +
+                        "(first_name, last_name, height_inches, weight_pounds, jersey_number, position, team_id) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?);")) {
+
+            sql.setString(1, firstName);
+            sql.setString(2, lastName);
+            sql.setInt(3, height);
+            sql.setInt(4, weight);
+            sql.setInt(5, jerseyNumber);
+            sql.setString(6, position);
+            sql.setInt(7, teamId);
+
+            sql.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
