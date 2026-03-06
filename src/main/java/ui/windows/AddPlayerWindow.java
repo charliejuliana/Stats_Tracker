@@ -98,7 +98,7 @@ public class AddPlayerWindow extends BasicWindow {
                 MessageDialog.showMessageDialog(
                         getTextGUI(),
                         "Error",
-                        "Jersey number and Team ID must be numbers.",
+                        "Height, Weight, Jersey number and Team ID must be numbers.",
                         MessageDialogButton.OK
                 );
             }

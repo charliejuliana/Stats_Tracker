@@ -28,4 +28,8 @@ public class StatsService {
 
         repo.insertPlayer(firstName, lastName, height, weight, jersey, position, teamId);
     }
+
+    public void deletePlayer(int playerId) {
+        repo.deletePlayer(playerId);
+    }
 }

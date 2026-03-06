@@ -68,4 +68,18 @@ public class StatsRepo {
             throw new RuntimeException(e);
         }
     }
+
+    public void deletePlayer(int playerId) {
+
+        try (PreparedStatement sql = conn.prepareStatement(
+                "DELETE FROM Player WHERE id = ?;")) {
+
+            sql.setInt(1, playerId);
+
+            sql.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -2,6 +2,8 @@ package ui.windows;
 
 import backend.services.StatsService;
 import com.googlecode.lanterna.gui2.*;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialogButton;
 import models.Player;
 import ui.UIController;
 
@@ -37,6 +39,7 @@ public class AllPlayersWindow extends BasicWindow {
         for (Player p : players) {
             alb.addItem(p.firstName() + " " + p.lastName(), ui::showPlayerStatsPage);
         }
+
         alb.addItem("Back", () -> ui.closeWindow(this));
 
         return panel;
