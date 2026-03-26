@@ -2,18 +2,18 @@ package ui.windows;
 
 import backend.services.StatsService;
 import com.googlecode.lanterna.gui2.*;
-import models.Player;
+import models.Team;
 import ui.UIController;
 
 import java.util.List;
 
-public class AllPlayersWindow extends BasicWindow {
+public class WhichTeamWindow extends BasicWindow {
 
     private final UIController ui;
     private final StatsService service;
 
-    public AllPlayersWindow(UIController ui, StatsService service) {
-        super("Who's Stats Do You Want To See?");
+    public WhichTeamWindow(UIController ui, StatsService service) {
+        super("Which Team Do You Want to View?");
         this.ui = ui;
         this.service = service;
         setHints(List.of(Hint.CENTERED));
@@ -29,13 +29,13 @@ public class AllPlayersWindow extends BasicWindow {
                 new LinearLayout(Direction.VERTICAL)
         );
 
-        List<Player> players = service.getAllPlayers();
+        List<Team> teams = service.getAllTeams();
 
         ActionListBox alb = new ActionListBox();
         panel.addComponent(alb);
 
-        for (Player p : players) {
-            alb.addItem(p.firstName() + " " + p.lastName(), ui::showPlayerStatsPage);
+        for (Team p : teams) {
+            alb.addItem(p.name(), ui::showPlayerStatsPage);
         }
 
         alb.addItem("Back", () -> ui.closeWindow(this));

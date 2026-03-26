@@ -7,20 +7,17 @@ import ui.UIController;
 
 import java.util.List;
 
-public class AllPlayersWindow extends BasicWindow {
+public class ChoosePlayerToUpdateWindow extends BasicWindow {
 
     private final UIController ui;
     private final StatsService service;
 
-    public AllPlayersWindow(UIController ui, StatsService service) {
-        super("Who's Stats Do You Want To See?");
+    public ChoosePlayerToUpdateWindow(UIController ui, StatsService service) {
+        super("Choose Player To Update");
         this.ui = ui;
         this.service = service;
         setHints(List.of(Hint.CENTERED));
         setComponent(build());
-    }
-
-    private record MenuItem(String name, Runnable func) {
     }
 
     private Component build() {
@@ -35,7 +32,8 @@ public class AllPlayersWindow extends BasicWindow {
         panel.addComponent(alb);
 
         for (Player p : players) {
-            alb.addItem(p.firstName() + " " + p.lastName(), ui::showPlayerStatsPage);
+            alb.addItem(p.firstName() + " " + p.lastName(),
+                    () -> ui.updatePlayerPage(p));
         }
 
         alb.addItem("Back", () -> ui.closeWindow(this));

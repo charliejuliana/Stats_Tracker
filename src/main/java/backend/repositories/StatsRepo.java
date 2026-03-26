@@ -2,6 +2,7 @@ package backend.repositories;
 
 import models.Player;
 import models.PlayerStats;
+import models.Team;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,13 +24,27 @@ public class StatsRepo {
         try (PreparedStatement sql = conn.prepareStatement("Select id, first_name, last_name FROM player")) {
             try (ResultSet rs = sql.executeQuery()) {
                 while (rs.next()) {
-                    players.add(new Player(rs.getInt("id"), rs.getString("first_name"), rs.getString("last_name")));
+                    players.add(new Player(rs.getInt("id"), rs.getString("first_name"), rs.getString("last_name"), rs.getInt("height_inches"), rs.getInt("weight_pounds"), rs.getInt("jersey_number"), rs.getString("position"), rs.getInt("team_id")));
                 }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return players;
+    }
+
+    public List<Team> getTeams() {
+        List<Team> teams = new ArrayList<>();
+        try (PreparedStatement sql = conn.prepareStatement("Select id, team_name FROM team")) {
+            try (ResultSet rs = sql.executeQuery()) {
+                while (rs.next()) {
+                    teams.add(new Team(rs.getInt("id"), rs.getString("team_name")));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return teams;
     }
 
     public List<PlayerStats> getPlayerStats() {
@@ -75,6 +90,29 @@ public class StatsRepo {
                 "DELETE FROM Player WHERE id = ?;")) {
 
             sql.setInt(1, playerId);
+
+            sql.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updatePlayer(int playerId, String firstName, String lastName, int height, int weight, int jerseyNumber, String position, int teamId) {
+
+        try (PreparedStatement sql = conn.prepareStatement(
+                "UPDATE Player " +
+                        "SET first_name = ?, last_name = ?, height_inches = ?, weight_pounds = ?, jersey_number = ?, position = ?, team_id = ? = ?, " +
+                        "WHERE player_id = ?;")) {
+
+            sql.setString(1, firstName);
+            sql.setString(2, lastName);
+            sql.setDouble(3, height);
+            sql.setDouble(4, weight);
+            sql.setInt(5, jerseyNumber);
+            sql.setString(6, position);
+            sql.setInt(7, teamId);
+            sql.setInt(8, playerId);
 
             sql.executeUpdate();
 

@@ -3,7 +3,6 @@ import backend.repositories.StatsRepo;
 import backend.services.StatsService;
 import ui.Gui;
 import ui.UIController;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;

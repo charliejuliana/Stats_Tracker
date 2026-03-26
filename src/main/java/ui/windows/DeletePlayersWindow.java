@@ -9,12 +9,12 @@ import ui.UIController;
 
 import java.util.List;
 
-public class DeletePlayerWindow extends BasicWindow {
+public class DeletePlayersWindow extends BasicWindow {
 
     private final UIController ui;
     private final StatsService service;
 
-    public DeletePlayerWindow(UIController ui, StatsService service) {
+    public DeletePlayersWindow(UIController ui, StatsService service) {
         super("Delete a Player");
         this.ui = ui;
         this.service = service;
@@ -59,7 +59,7 @@ public class DeletePlayerWindow extends BasicWindow {
                     );
 
                     ui.closeWindow(this);
-                    ui.deletePlayerPage();
+                    ui.deletePlayersPage();
                 }
             });
         }
