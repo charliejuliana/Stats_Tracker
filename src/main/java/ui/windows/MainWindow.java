@@ -33,7 +33,6 @@ public class MainWindow extends BasicWindow {
                 new MenuItem("Edit Teams", ui::editTeamsPage),
                 new MenuItem("Edit Players", ui::editPlayersPage),
                 new MenuItem("Edit Games", ui::editGamesPage),
-                new MenuItem("View All Players", ui::showAllPlayersPage),
                 new MenuItem("View Player Stats", ui::whichTeamPage),
                 new MenuItem("Exit", ui::closeApp)
         };

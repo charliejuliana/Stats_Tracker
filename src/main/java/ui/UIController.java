@@ -40,7 +40,7 @@ public class UIController {
 
     public void choosePlayerToUpdatePage() { gui.show(new ChoosePlayerToUpdateWindow(this, statsService)); }
 
-    public void updatePlayerPage(Player player) { gui.show(new ChoosePlayerToUpdateWindow(this, statsService)); }
+    public void updatePlayerPage(Player player) { gui.show(new UpdatePlayerWindow(this, statsService, player)); }
 
     public void closeWindow(Window window) {
         window.close();

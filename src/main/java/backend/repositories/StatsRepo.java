@@ -21,10 +21,20 @@ public class StatsRepo {
 
     public List<Player> getPlayers() {
         List<Player> players = new ArrayList<>();
-        try (PreparedStatement sql = conn.prepareStatement("Select id, first_name, last_name FROM player")) {
+        try (PreparedStatement sql = conn.prepareStatement(
+                "SELECT id, first_name, last_name, height_inches, weight_pounds, jersey_number, position, team_id FROM player")) {
             try (ResultSet rs = sql.executeQuery()) {
                 while (rs.next()) {
-                    players.add(new Player(rs.getInt("id"), rs.getString("first_name"), rs.getString("last_name"), rs.getInt("height_inches"), rs.getInt("weight_pounds"), rs.getInt("jersey_number"), rs.getString("position"), rs.getInt("team_id")));
+                    players.add(new Player(
+                            rs.getInt("id"),
+                            rs.getString("first_name"),
+                            rs.getString("last_name"),
+                            rs.getInt("height_inches"),
+                            rs.getInt("weight_pounds"),
+                            rs.getInt("jersey_number"),
+                            rs.getString("position"),
+                            rs.getInt("team_id")
+                    ));
                 }
             }
         } catch (SQLException e) {
@@ -102,8 +112,8 @@ public class StatsRepo {
 
         try (PreparedStatement sql = conn.prepareStatement(
                 "UPDATE Player " +
-                        "SET first_name = ?, last_name = ?, height_inches = ?, weight_pounds = ?, jersey_number = ?, position = ?, team_id = ? = ?, " +
-                        "WHERE player_id = ?;")) {
+                        "SET first_name = ?, last_name = ?, height_inches = ?, weight_pounds = ?, jersey_number = ?, position = ?, team_id = ? " +
+                        "WHERE id = ?;")) {
 
             sql.setString(1, firstName);
             sql.setString(2, lastName);

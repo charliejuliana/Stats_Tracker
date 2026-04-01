@@ -35,7 +35,7 @@ public class WhichTeamWindow extends BasicWindow {
         panel.addComponent(alb);
 
         for (Team p : teams) {
-            alb.addItem(p.name(), ui::showPlayerStatsPage);
+            alb.addItem(p.name(), ui::showAllPlayersPage);
         }
 
         alb.addItem("Back", () -> ui.closeWindow(this));
